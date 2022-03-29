@@ -1,0 +1,51 @@
+main {
+    color: black;
+    &-sidebear{
+        border: 1px Solid;
+    }
+    a{
+        font-weight: bold;
+        &:hover{
+            color: red;
+        }
+    }
+}
+.funky{
+    font:{
+        family: fantasy;
+        size: 30em;
+        weight: bold;
+    }
+}
+.funky{
+    font: 20/24px fantasy{
+        weight: bold;
+    }
+}
+#context a%extreme{
+    color: aqua;
+    font-weight: 400;
+    font-size: 2em;
+}
+.notice{
+    @extend %extreme;
+}
+$version: "1.1.3";
+/* Version: #{$version}.*/
+$width: 5em;
+#main{
+    width: $width;
+}
+#main{
+    $width: 5em !global;
+    width: $width;
+}
+#sidebear{
+    width: $width;
+}
+@mixin forefox-message($selector){
+    body.firfox #{$selector}:before{
+        content: "hi";
+    }
+}
+@include firefox-message(".header");
