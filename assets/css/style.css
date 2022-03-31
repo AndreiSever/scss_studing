@@ -1,3 +1,4 @@
+@charset "UTF-8";
 main {
   color: black;
 }
@@ -48,6 +49,90 @@ body.firfox .header:before {
   content: "hi";
 }
 
+body.firfox .footer:before {
+  content: "adsadasd";
+  font-weight: bold;
+}
+
 #sidebear {
   width: 12px;
+}
+
+.message--primary {
+  background: #000;
+}
+
+.message--success {
+  background: #27BA6C;
+}
+
+.message--info {
+  background: #03a9f4;
+}
+
+.message--warning {
+  background: #FF8833;
+}
+
+.message--danger {
+  background: #ff1a1a;
+}
+
+.map-get {
+  font-weight: 500;
+}
+
+.map-merge {
+  font-weight: 900;
+}
+
+p {
+  font: 10px/8px;
+  width: 500px;
+  width: 1;
+  height: 250px;
+  margin-left: 9px;
+}
+
+p {
+  font: 12px/30px;
+}
+
+p {
+  color: #050709;
+}
+
+p {
+  color: #020406;
+}
+
+p {
+  color: rgba(255, 0, 0, 0.8);
+  background-color: rgba(255, 0, 0, 0.25);
+}
+
+p {
+  cursor: e-resize;
+}
+
+p:before {
+  content: "Foo Bar";
+  font-family: sans-serif;
+}
+
+p {
+  margin: 7px auto;
+}
+
+p:before {
+  content: "Я съел 15 пирогов!";
+}
+
+p:before {
+  content: "Я съел  пирогов!";
+}
+
+.menu li {
+  color: #27BA6C;
+  text-decoration: underline;
 }

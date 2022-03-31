@@ -49,9 +49,92 @@ $width: 5em;
     }
 }
 @include firefox-message(".header");
+@mixin message($selector, $bold, $text){
+    body.firfox #{$selector}:before{
+        content: $text;
+        font-weight: #{$bold};
+    }
+}
+@include message(".footer", "bold", "adsadasd");
 $size: 10px 12px 16px;
 $newsize: join($size, 10px);
 $newsize: append($newsize,20px);
 #sidebear{
     width: nth($size, 2);
 }
+$map: (key1: 1, key2:2);
+$status-color:(
+    primary:#000,
+    success: #27BA6C,
+    info: #03a9f4,
+    warning: #FF8833,
+    danger: #ff1a1a
+);
+
+.message {
+    @each $status, $color in $status-color{
+        &--#{$status}{
+            background: $color;
+        }
+    }
+}
+$font-weights: ("regular": 400, "medium": 500, "bold": 700);
+.map-get{
+    font-weight: map-get($font-weights, "medium");
+}
+$font-weights: map-merge($font-weights, ("semibold": 900)); 
+.map-merge{
+    font-weight: map-get($font-weights, "semibold");
+}
+p {
+    font: 10px/8px;             // Явный CSS, деление отсутствует
+    $width: 1000px;
+    width: $width/2;            // Используется переменная, операция деления
+    width: round(1.5)/2;        // Используется функция, операция деления
+    height: (500px/2);          // Обособление скобками, операция деления
+    margin-left: 5px + 8px/2px; // Используется +, операция деления
+  }
+  p {
+    $font-size: 12px;
+    $line-height: 30px;
+    font: #{$font-size}/#{$line-height};
+  }
+  p {
+    color: #010203 + #040506;
+  }
+  p {
+    color: #010203 * 2;
+  }
+
+  $translucent-red: rgba(255, 0, 0, 0.5);
+  p{
+      color: opacify($translucent-red, 0.3);
+      background-color: transparentize($translucent-red, 0.25);
+  }
+  p {
+    cursor: e + -resize;
+  }
+  p:before {
+    content: "Foo " + Bar;
+    font-family: sans- + "serif";
+  }
+  p {
+    margin: 3px + 4px auto;
+  }
+  p:before {
+    content: "Я съел #{5 + 10} пирогов!";
+  }
+  $value: null;
+  p:before {
+      content: "Я съел #{$value} пирогов!";
+  }
+  $menuOn: true;
+  $menuDropDown: false;
+  .menu li{
+      color: #27BA6C;
+      text-decoration: underline;
+      @if $menuOn ==true and $menuDropDown == true{
+          position: relative;
+      }
+  }
+  
