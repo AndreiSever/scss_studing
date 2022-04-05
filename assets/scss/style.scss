@@ -30,6 +30,15 @@ main {
 .notice{
     @extend %extreme;
 }
+.error {
+    border: 1px #f00;
+    background-color: #fdd;
+  }
+  
+  .seriousError {
+    @extend .error;
+    border-width: 3px;
+  }
 $version: "1.1.3";
 /* Version: #{$version}.*/
 $width: 5em;
@@ -137,4 +146,154 @@ p {
           position: relative;
       }
   }
+  p{
+      color: hsl($hue: 0, $saturation: 100%, $lightness: 50%);
+  }
   
+  $name: foo;
+  $attr: border;
+  p.#{$name}{
+      #{$attr}-color:blue;
+    }
+    $selector:  ((".foo.bar" ".baz.bang"), ".bip.qux");
+    .foo.bar .baz.bang, .bip.qux{
+        $selector: &;
+    }
+    
+    @mixin does-parent-exist{
+        @if & {
+            &:hover{
+                color:red;
+            }
+        }@else{
+            a {
+                color: red;
+            }
+        }
+    }
+    a {
+        @include does-parent-exist;
+    }
+    $content: "Текстовый текст";
+    $content: "Новый текстовый текст?" !default;
+    $new_content: "Как пройти в библиотеку?";
+    #main {
+        content: $content;
+        new-content: $new_content;
+    }
+
+    @import "colors";
+    
+    .sidebar {
+        width: 300px;
+        
+        @media screen and (orientation: landscape){
+            width: 500px;
+        }
+    }
+    @media screen {
+        .sidebar{
+            @media (orientation: landscape){
+                width: 500px;
+            }
+        }
+    }
+
+    $media: screen;
+    $feature: -webkit-min-device-pixel-ratio;
+    $value: 1.5;
+
+    @media #{$media} and ($feature: $value) {
+        .sidebar {
+            width: 500px;
+        }
+    }
+
+    @media print {
+        .page {
+          width: 8in;
+      
+          @at-root (without: media) {
+            color: red;
+          }
+        }
+      }
+
+      @debug 10em + 12em;
+
+      @mixin adjust-location($x, $y){
+          @if unitless($x){
+              @warn "Предположительно задано в пикселях";
+              $x: 1px *$x;
+          }
+          @if unitless($y){
+            @warn "Предположительно задано в пикселях";
+            $y: 1px *$y;
+        }
+        position: relative;
+        left: $x;
+        top: $y;
+      }
+      .notice{
+          @include adjust-location(2px, 1px);
+      }
+
+      @mixin adjust-location($x, $y) {
+        @if unitless($x) {
+          @error "$x не может быть безразмерным, было .";
+        }
+        @if unitless($y) {
+          @error "$y не может быть безразмерным, было .";
+        }
+        position: relative; 
+        left: $x; 
+        top: $y;
+      }
+
+      $type: monster;
+      p{
+          @if $type == ocean{
+              color: blue;
+          }@else if $type == matador{
+            color: red;
+          }@else if $type == monster{
+              color: green;
+          }@else{
+              color: black;
+          }
+      }
+
+      @for $i from 1 through 3{
+          .item-#{$i}{
+              width: 2em * $i;
+          }
+      }
+
+      @for $i from 1 to 4{
+        .li-#{$i}{
+            width: 2em * $i;
+        }
+    }
+    @each $animal, $color, $cursor in (puma, black, default),
+                                (sea-slug, blue, pointer),
+                                (egret, white, move) {
+        .#{$animal}-icon {
+            background-image: url('/images/#{$animal}.png');
+            border: 2px solid $color;
+            cursor: $cursor;
+        }
+    }
+
+    @each $head, $massive in (v1: (h1: 2em, h2: 1.5em, h3: 1.2em), v2: (h4: 2em, h5: 1.5em, h6: 1.2em)) {
+        @each $header, $size in $massive{
+            #{$header} {
+            font-size: $size;
+            }
+        }
+      }
+    
+      $i: 6;
+      @while $i > 0 {
+        .item-#{$i} { width: 2em * $i; }
+        $i: $i - 2;
+      }
